@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:refyne_task/app/app_colors.dart';
 import 'package:refyne_task/app/dimensions.dart';
 import 'package:refyne_task/domain/entity/user_repo.dart';
@@ -74,15 +75,40 @@ class DetailedUserRepoCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Name: ${item.fullName ?? " "}"),
-          const SizedBox(
-            height: Dimensions.PADDING_SIZE_DEFAULT,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.network(item.owner?.avatarUrl??"https://png.pngtree.com/png-vector/20190917/ourmid/pngtree-not-found-circle-icon-vectors-png-image_1737851.jpg",
+              height: MediaQuery.of(Get.context!).size.height*0.1,width: MediaQuery.of(Get.context!).size.height*0.1,),
+              const SizedBox(
+                width: Dimensions.PADDING_SIZE_SMALL,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Name: ${item.fullName ?? " "}"),
+                    const SizedBox(
+                      height: Dimensions.PADDING_SIZE_SMALL,
+                    ),
+                    Text("Description ${item.description ?? " "}",maxLines: 10,overflow: TextOverflow.visible,),
+                    const SizedBox(
+                      height: Dimensions.PADDING_SIZE_DEFAULT,
+                    ),
+                    Text("Count: ${item.forksCount.toString() ?? " "}"),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Text("Description ${item.description ?? " "}"),
           const SizedBox(
-            height: Dimensions.PADDING_SIZE_DEFAULT,
+            height: Dimensions.PADDING_SIZE_SMALL,
           ),
-          Text("Count: ${item.forksCount.toString() ?? " "}"),
+          Text("login: ${item.owner?.login ?? " "}"),
+          const SizedBox(
+            height: Dimensions.PADDING_SIZE_SMALL,
+          ),
+          Text("Owner Type: ${item.owner?.type ?? " "}"),
         ],
       ),
     );
