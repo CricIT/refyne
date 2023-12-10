@@ -32,9 +32,7 @@ class LandingPage extends GetView<LandingPageController> {
               child: GetX(
                   init: controller,
                   builder: (context) {
-                    return SingleChildScrollView(
-                      child: renderUI(),
-                    );
+                    return renderUI();
                   })),
         ));
   }
